@@ -1,10 +1,9 @@
 # Getting Started with Job portal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+this application for listing job
+## Available ScriptsThis p
 
-## Available Scripts
-
-In the project directory, you can run:
+n the project direcItory, you can run:
 
 ### `npm start`
 
