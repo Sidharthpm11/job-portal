@@ -2,4 +2,4 @@
 
 ## description
 
-'npm install'
+'npm start'
