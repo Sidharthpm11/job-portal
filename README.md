@@ -2,7 +2,4 @@
 
 ## description
 
-<addr>
-npm install
-npm start
-<addr>
+'npm install'
