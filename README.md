@@ -1,6 +1,6 @@
 # Getting Started with Job portal
 
-this application for listing job
+this is the application for job search and related process
 ## Available ScriptsThis p
 
 n the project direcItory, you can run:
