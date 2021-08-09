@@ -20,6 +20,7 @@ import Drawer from "@material-ui/core/Drawer";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
 import { useAppcontext } from "../../core/AppContext";
+import './Header.css';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +99,7 @@ export default function Header() {
     <>
       <AppBar
         position="absolute"
+        style={{backgroundColor:"black"}}
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar className={classes.toolbar}>
@@ -136,7 +138,7 @@ export default function Header() {
         }}
         open={open}
       >
-        <div className={classes.toolbarIcon}>
+        <div style={{color:"white"}, {backgroundColor:"brown"}} className={classes.toolbarIcon}>
           <Typography className={classes.appTtitle} component="h1" variant="h5">
             Job Portal
           </Typography>
