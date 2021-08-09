@@ -5,17 +5,22 @@ import Home from "./containers/Home/Home";
 import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
+import JobDetails from "./containers/JobDetails/JobDetails";
+import AppContext from "./core/AppContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App-root">
-        <CssBaseline />
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
-      </div>
+      <AppContext>
+        <div className="App-root">
+          <CssBaseline />
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/job/:id" component={JobDetails} />
+          </Switch>
+        </div>
+      </AppContext>
     </BrowserRouter>
   );
 }

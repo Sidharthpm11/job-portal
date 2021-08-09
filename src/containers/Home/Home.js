@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Button, Typography } from "@material-ui/core";
 import { getJobs } from "../../services/job.services";
+import { useHistory } from "react-router-dom";
+import { useAppcontext } from "../../core/AppContext";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -34,25 +36,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
+  const appData = useAppcontext();
   const initialState = {
     jobs: []
   }
   const [state, setstate] = useState(initialState);
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
+    appData.setTitle('Home');
     getJobs()
     .then((res)=>{
       setstate({...state, jobs: res})
     })
   }, []);
+
+  const gotoDetailPage = (id) => {
+    history.push('/job/'+id);
+  }
   const getJobsList = ()=> state.jobs.map((item)=> {
     return (
       <Paper key={item.id} className={fixedHeightPaper}>
         <Typography component="h3" variant="h5">{item.title}</Typography>
         <Typography component="h4" variant="caption">{item.company}, {item.location}</Typography>
         <p>{item.description}</p>
-        <Button className={classes.moreButton} variant="contained" color="primary">
+        <Button onClick={()=>gotoDetailPage(item.id)} className={classes.moreButton} variant="contained" color="primary">
           More Details
         </Button>
       </Paper>

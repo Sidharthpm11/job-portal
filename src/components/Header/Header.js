@@ -19,6 +19,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import Drawer from "@material-ui/core/Drawer";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link } from "react-router-dom";
+import { useAppcontext } from "../../core/AppContext";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
+    minHeight: '100vh',
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -83,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Header() {
+  const appData = useAppcontext();
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -117,7 +120,7 @@ export default function Header() {
             noWrap
             className={classes.title}
           >
-            Home
+            {appData.title}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
