@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Badge,
   Divider,
   List,
   ListItem,
@@ -9,6 +8,9 @@ import {
   ListItemIcon,
   ListItemText,
   makeStyles,
+  Menu,
+  MenuItem,
+  Avatar,
 } from "@material-ui/core";
 import { AppBar } from "@material-ui/core";
 import clsx from "clsx";
@@ -17,10 +19,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Drawer from "@material-ui/core/Drawer";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link } from "react-router-dom";
 import { useAppcontext } from "../../core/AppContext";
-import './Header.css';
+import "./Header.css";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: "#00000",
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -67,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
-    minHeight: '100vh',
+    minHeight: "100vh",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -88,78 +91,97 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const appData = useAppcontext();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(true); 
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  return (
-    <>
-      <AppBar
-        position="absolute"
-        style={{backgroundColor:"black"}}
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            {appData.title}
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div style={{color:"white"}, {backgroundColor:"brown"}} className={classes.toolbarIcon}>
-          <Typography className={classes.appTtitle} component="h1" variant="h5">
-            Job Portal
-          </Typography>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <div>
-            <Link to="/">
-              <ListItem>
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Home" />
-              </ListItem>
-            </Link>
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return appData.showHeader ? (
+      <>
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, open && classes.appBarShift)}
+        >
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              {appData.title}
+            </Typography>
+            <Avatar color="inherit" onClick={handleClick}>
+              <AccountCircleIcon />
+            </Avatar>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={clsx(classes.toolbarIcon, "logo-container")}>
+            <Typography
+              className={classes.appTtitle}
+              component="h1"
+              variant="h5"
+            >
+              Job Portal
+            </Typography>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
           </div>
-        </List>
-      </Drawer>
-    </>
-  );
+          <Divider />
+          <List>
+            <div>
+              <Link to="/">
+                <ListItem>
+                  <ListItemIcon>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItem>
+              </Link>
+            </div>
+          </List>
+        </Drawer>
+      </>
+    ) : (
+      ""
+    );
 }

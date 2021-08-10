@@ -1,23 +1,25 @@
-import axios from "axios";
+import axios from '../core/axios';
 
-const baseUrl = "http://localhost:3000/";
-axios.defaults.baseURL = baseUrl;
 let jobs;
-export const getJobs = () => {
-  if (jobs) {
-    return new Promise((resolve, reject) => {
-      resolve(jobs);
-    });
-  } else {
-    return axios.get("/data/jobs.json").then((a) => {
-      jobs = a.data;
-      return a.data;
-    });
+export const getJobs = async () => {
+  if (!jobs) {
+    await setJobsFromApi();
   }
+  return new Promise((resolve, reject) => {
+    resolve(jobs);
+  });
 };
 
-export const getJobDetails = (id) => {
+export const getJobDetails = async (id) => {
+  if (!jobs) {
+    await setJobsFromApi();
+  }
   return new Promise((resolve, reject) => {
-    resolve(jobs.find((a) => a.id == id));
+    resolve(jobs.find((a) => a.id === id));
   });
+};
+
+const setJobsFromApi = async () => {
+  const res = await axios.get("/data/jobs.json");
+  jobs = res.data;
 };

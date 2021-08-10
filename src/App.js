@@ -7,6 +7,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import JobDetails from "./containers/JobDetails/JobDetails";
 import AppContext from "./core/AppContext";
+import Login from "./containers/Login/Login";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/job/:id" component={JobDetails} />
+            <Route path="/login" component={Login} />
+            <Route path="/job/:id" component={JobDetails} />
           </Switch>
         </div>
       </AppContext>
