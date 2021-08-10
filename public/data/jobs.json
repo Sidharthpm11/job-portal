@@ -3,49 +3,70 @@
         "id": "1",
         "title": "Front end developer",
         "company": "Wipro",
+        "salary": "17000",
+        "workEx": "0-6 year",
+        "worktime":"11 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 0-6 years of expeirence. required skills are html,css,javascript"
     },
     {
         "id": "2",
         "title": "Angular developer",
         "company": "Wipro",
+        "salary": "13000",
+        "workEx": "0-3 year",
+        "worktime":"9 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 0-3 years of expeirence. required skills are html,css,javascript"
     },
     {
         "id": "3",
         "title": "React developer",
         "company": "Wipro",
+        "salary": "17000",
+        "workEx": "0-8 year",
+        "worktime":"7 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 0-8 years of expeirence.  required skills are html,css,javascript"
     },
     {
         "id": "4",
         "title": "Python developer",
         "company": "Wipro",
+        "salary": "10000",
+        "workEx": "0-6 year",
+        "worktime":"5 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 0-6 years of expeirence.  required skills are html,css,javascript"
     },
     {
         "id": "5",
         "title": "Java developer",
         "company": "Wipro",
+        "salary": "19000",
+        "workEx": "0-7 year",
+        "worktime":"11 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 0-7 years of expeirence.  required skills are html,css,javascript"
     },
     {
         "id": "6",
         "title": "HTML developer",
         "company": "Wipro",
+        "salary": "23000",
+        "workEx": "2-8 year",
+        "worktime":"8 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 2-8 years of expeirence.  required skills are html,css,javascript"
     },
     {
         "id": "7",
         "title": "php developer",
         "company": "Wipro",
+        "salary": "17000",
+        "workEx": "0-5 year",
+        "worktime":"11 hour",
         "location": "US",
-        "description": "We are looking for front end developer with 6 years of expeirence"
+        "description": "We are looking for front end developer with 0-5 years of expeirence.  required skills are html,css,javascript"
     }
 ]
