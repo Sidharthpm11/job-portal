@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import JobDetails from "./containers/JobDetails/JobDetails";
 import AppContext from "./core/AppContext";
 import Login from "./containers/Login/Login";
+import ProtectedRouter from "./core/ProtectedRouter";
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
           <CssBaseline />
           <Header />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <ProtectedRouter  exact path="/" component={Home}  />
             <Route path="/login" component={Login} />
-            <Route path="/job/:id" component={JobDetails} />
+            <ProtectedRouter  path="/job/:id" component={JobDetails}  />
           </Switch>
         </div>
       </AppContext>

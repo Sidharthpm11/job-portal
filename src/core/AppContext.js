@@ -7,18 +7,19 @@ export const useAppcontext = () => useContext(testContext);
 export default function AppContext(props) {
   const initialState = {
     title: "",
-    showHeader: true,
-    isLoggdin: false,
+    isLoggdin: !!localStorage.getItem('isLoggdin'),
     setTitle: (title) => {
-      setstate({ ...state, title: title });
-    },
-    setHeader: (show) => {
-      setstate({ ...state, showHeader: show });
+      stateUpdate({title});
     },
     setLoggedin: (show) => {
-      setstate({ ...state, isLoggdin: show });
+      stateUpdate({isLoggdin: show });
     },
   };
+  const stateUpdate = (obj)=>{
+    setstate((state)=>{
+      return {...state, ...obj}
+    })
+  }
   const [state, setstate] = useState(initialState);
   return (
     <testContext.Provider value={state}>{props.children}</testContext.Provider>

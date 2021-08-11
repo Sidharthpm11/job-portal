@@ -20,9 +20,10 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Drawer from "@material-ui/core/Drawer";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAppcontext } from "../../core/AppContext";
 import "./Header.css";
+import { userLogout } from "../../services/user.service";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -89,8 +90,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Header() {
-  const appData = useAppcontext();
+  const {title, isLoggdin, setLoggedin} = useAppcontext();
   const classes = useStyles();
+  const history = useHistory();
   const [open, setOpen] = React.useState(true); 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleDrawerOpen = () => {
@@ -105,7 +107,12 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  return appData.showHeader ? (
+  const logout = () => {
+    userLogout();
+    setLoggedin(false);
+    history.push('/login');
+  };
+  return isLoggdin ? (
       <>
         <AppBar
           position="absolute"
@@ -131,7 +138,7 @@ export default function Header() {
               noWrap
               className={classes.title}
             >
-              {appData.title}
+              {title}
             </Typography>
             <Avatar color="inherit" onClick={handleClick}>
               <AccountCircleIcon />
@@ -143,7 +150,7 @@ export default function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
           </Toolbar>
         </AppBar>

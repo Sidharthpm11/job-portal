@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -31,24 +31,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login(props) {
-    const [email, setemail] = useState('')
-    const [pass, setpass] = useState('')
-  const appData = useAppcontext();
+  const [email, setemail] = useState("");
+  const [pass, setpass] = useState("");
+  const { setLoggedin, isLoggdin } = useAppcontext();
   const classes = useStyles();
-  useEffect(() => {
-    appData.setHeader(false);
-  }, []);
   const submitForm = (e) => {
     e.preventDefault();
     checkLogin(email, pass).then((res) => {
       if (res) {
-        appData.setLoggedin(true);
+        setLoggedin(true);
         props.history.push("/");
       } else {
         alert("invalid credentials");
       }
     });
   };
+  if(isLoggdin) {
+    props.history.push("/");
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -72,7 +72,7 @@ export default function Login(props) {
             autoComplete="email"
             autoFocus
             value={email}
-            onChange={(e)=> setemail(e.target.value)}
+            onChange={(e) => setemail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -85,7 +85,7 @@ export default function Login(props) {
             id="password"
             autoComplete="current-password"
             value={pass}
-            onChange={(e)=> setpass(e.target.value)}
+            onChange={(e) => setpass(e.target.value)}
           />
           <Button
             type="submit"
