@@ -9,6 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useAppcontext } from "../../core/AppContext";
 import { checkLogin } from "../../services/user.service";
+import { connect } from "react-redux";
+import { fetchUser } from "../../store/actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login(props) {
+function Login(props) {
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const { setLoggedin, isLoggdin } = useAppcontext();
@@ -39,6 +41,10 @@ export default function Login(props) {
     e.preventDefault();
     checkLogin(email, pass).then((res) => {
       if (res) {
+        const user = {
+          name: "Sidharth"
+        }
+        props.fetchUser(user);
         setLoggedin(true);
         props.history.push("/");
       } else {
@@ -101,3 +107,11 @@ export default function Login(props) {
     </Container>
   );
 }
+
+
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    fetchUser: (user) => dispatch(fetchUser(user))
+  }
+}
+export default connect(null, mapDispatchToProps)(Login)

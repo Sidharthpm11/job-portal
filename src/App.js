@@ -6,6 +6,8 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import AppContext from "./core/AppContext";
 import ProtectedRouter from "./core/ProtectedRouter";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 function App() {
   const Home = React.lazy(() => import("./containers/Home/Home"));
@@ -17,18 +19,20 @@ function App() {
   return (
     <BrowserRouter>
       <AppContext>
-        <div className="App-root">
-          <CssBaseline />
-          <Header />
-          <Suspense fallback={<h2>Loading....</h2>}>
-            <Switch>
-              <ProtectedRouter exact path="/" component={Home} />
-              <Route path="/login" component={Login} />
-              <ProtectedRouter path="/job/:id" component={JobDetails} />
-              <Route render={() => <Redirect to="/" />} />
-            </Switch>
-          </Suspense>
-        </div>
+        <Provider store={store}>
+          <div className="App-root">
+            <CssBaseline />
+            <Header />
+            <Suspense fallback={<h2>Loading....</h2>}>
+              <Switch>
+                <ProtectedRouter exact path="/" component={Home} />
+                <Route path="/login" component={Login} />
+                <ProtectedRouter path="/job/:id" component={JobDetails} />
+                <Route render={() => <Redirect to="/" />} />
+              </Switch>
+            </Suspense>
+          </div>
+        </Provider>
       </AppContext>
     </BrowserRouter>
   );

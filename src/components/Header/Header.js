@@ -24,6 +24,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAppcontext } from "../../core/AppContext";
 import "./Header.css";
 import { userLogout } from "../../services/user.service";
+import { connect } from "react-redux";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function Header() {
+function Header(props) {
   const {title, isLoggdin, setLoggedin} = useAppcontext();
   const classes = useStyles();
   const history = useHistory();
@@ -141,7 +142,7 @@ export default function Header() {
               {title}
             </Typography>
             <Avatar color="inherit" onClick={handleClick}>
-              <AccountCircleIcon />
+              {props.user ? props.user.name[0].toUpperCase(): <AccountCircleIcon />}
             </Avatar>
             <Menu
                 id="simple-menu"
@@ -192,3 +193,11 @@ export default function Header() {
       ""
     );
 }
+
+const mapStateToProps = (state) =>{
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(Header);
