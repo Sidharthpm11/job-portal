@@ -61,7 +61,7 @@ export default function Home() {
       return (
         <Paper
           key={item.id}
-          style={({ padding: "30px" }, { backgroundColor: "skyblue" })}
+          style={({ padding: "30px", backgroundColor: "skyblue" })}
           className={fixedHeightPaper}
         >
           <Typography component="h2" variant="h5">
