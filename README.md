@@ -2,9 +2,7 @@
 
 job portal for job search
 
-## Available Scripts
-
-In the project directory, you can run:
+n the project direcItory, you can run:
 
 ### `npm start`
 
